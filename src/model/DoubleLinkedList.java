@@ -10,19 +10,22 @@ public class DoubleLinkedList<K, T> {
         this.tail = null;
     }
 
-    public void add(K key, T value) {
+    public String add(K key, T value) {
         Node<K, T> newNode = new Node<>(key, value);
         if (head == null) {
             head = newNode;
             tail = newNode;
-            return;
+            size++;
+            return "The node was added";
         }
         tail.setNext(newNode);
         newNode.setPrevious(tail);
         tail = newNode;
+        size++;
+        return "The node was added";
     }
 
-    public void remove(K key) {
+    public String remove(K key) {
         Node<K, T> currentNode = head;
         while (currentNode != null) {
             if (currentNode.getKey().equals(key)) {
@@ -37,21 +40,23 @@ public class DoubleLinkedList<K, T> {
                     currentNode.getNext().setPrevious(currentNode.getPrevious());
                 }
                 size--;
-                return;
+                return "The node was removed";
             }
             currentNode = (Node<K, T>) currentNode.getNext();
         }
+        return "The node was not found";
     }
 
-    public void swap(K key1, K key2) {
+    public String swap(K key1, K key2) {
         Node<K, T> node1 = getNode(key1);
         Node<K, T> node2 = getNode(key2);
         if (node1 == null || node2 == null) {
-            return;
+            return "The nodes were not found";
         }
         T temp = node1.getValue();
         node1.setValue(node2.getValue());
         node2.setValue(temp);
+        return "The nodes were swapped";
     }
 
     private Node<K, T> getNode(K key1) {
@@ -76,5 +81,9 @@ public class DoubleLinkedList<K, T> {
             currentNode = (Node<K, T>) currentNode.getNext();
         }
         return stringBuilder.toString();
+    }
+
+    private int getSize() {
+        return size;
     }
 }

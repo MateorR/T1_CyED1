@@ -5,13 +5,13 @@ public interface INode<K, V> {
 
     V getValue();
 
-    INode<K, V> getNext();
+    Node<K, V> getNext();
 
-    void setNext(INode<K, V> nextNode);
+    void setNext(Node<K, V> nextNode);
 
-    INode<K, V> getPrevious();
+    Node<K, V> getPrevious();
 
-    void setPrevious(INode<K, V> previousNode);
+    void setPrevious(Node<K, V> previousNode);
 
     void setValue(V value);
 }
