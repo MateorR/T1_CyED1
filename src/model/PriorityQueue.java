@@ -1,7 +1,5 @@
 package model;
 
-import model.interfaces.*;
-
 import java.util.ArrayList;
 
 public class PriorityQueue<T extends Comparable<T>> implements Prioritable<T>{
