@@ -2,8 +2,9 @@ package model;
 
 public class Node<K, V> implements INode<K, V> {
     private final K key;
-    private final V value;
+    private V value;
     private INode<K, V> next;
+    private INode<K, V> previous;
 
     public Node(K key, V value) {
         this.key = key;
@@ -29,5 +30,20 @@ public class Node<K, V> implements INode<K, V> {
     @Override
     public void setNext(INode<K, V> nextNode) {
         this.next = nextNode;
+    }
+
+    @Override
+    public INode<K, V> getPrevious() {
+        return previous;
+    }
+
+    @Override
+    public void setPrevious(INode<K, V> previousNode) {
+        this.previous = previousNode;
+    }
+
+    @Override
+    public void setValue(V value) {
+        this.value = value;
     }
 }
