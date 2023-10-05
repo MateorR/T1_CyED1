@@ -1,4 +1,4 @@
-package implementations.interfaces;
+package implementations;
 
 public interface Stackable<T> {
     public void push(T value);

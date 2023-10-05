@@ -1,12 +1,12 @@
-package model;
+package implementations;
 
-public class Node<K, V> implements INode<K, V> {
+public class HashNode<K, V> implements INode<K, V> {
     private final K key;
     private V value;
-    private Node<K, V> next;
-    private Node<K, V> previous;
+    private HashNode<K, V> next;
+    private HashNode<K, V> previous;
 
-    public Node(K key, V value) {
+    public HashNode(K key, V value) {
         this.key = key;
         this.value = value;
         this.next = null;
@@ -23,22 +23,22 @@ public class Node<K, V> implements INode<K, V> {
     }
 
     @Override
-    public Node<K, V> getNext() {
+    public HashNode<K, V> getNext() {
         return next;
     }
 
     @Override
-    public void setNext(Node<K, V> nextNode) {
+    public void setNext(HashNode<K, V> nextNode) {
         this.next = nextNode;
     }
 
     @Override
-    public Node<K, V> getPrevious() {
+    public HashNode<K, V> getPrevious() {
         return previous;
     }
 
     @Override
-    public void setPrevious(Node<K, V> previousNode) {
+    public void setPrevious(HashNode<K, V> previousNode) {
         this.previous = previousNode;
     }
 

@@ -1,6 +1,4 @@
-package model;
-
-import implementations.interfaces.Stackable;
+package implementations;
 
 public class Stack<T> implements Stackable<T> {
     private StackNode<T> top;

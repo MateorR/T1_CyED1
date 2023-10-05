@@ -1,6 +1,4 @@
-package model;
-
-import implementations.interfaces.Prioritable;
+package implementations;
 
 import java.util.ArrayList;
 

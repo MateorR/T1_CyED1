@@ -1,4 +1,4 @@
-package implementations.interfaces;
+package implementations;
 
 public interface Prioritable<T> {
     public T front();

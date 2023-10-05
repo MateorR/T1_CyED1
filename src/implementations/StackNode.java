@@ -1,4 +1,4 @@
-package model;
+package implementations;
 
 public class StackNode<T> {
     private StackNode<T> under;

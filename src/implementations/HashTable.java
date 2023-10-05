@@ -1,10 +1,10 @@
-package model;
+package implementations;
 
 import java.util.ArrayList;
 
 public class HashTable<K, V> implements IHashTable<K, V> {
     private static final int DEFAULT_CAPACITY = 10;
-    private final ArrayList<Node<K, V>> table;
+    private final ArrayList<HashNode<K, V>> table;
     private int size;
 
     public HashTable() {
@@ -16,16 +16,16 @@ public class HashTable<K, V> implements IHashTable<K, V> {
     }
 
     @Override
-    public void put(K key, V value) {
-        int index = getIndex(key);
-        Node<K, V> newNode = new Node<>(key, value);
+    public void add(K key, V value) {
+        int index = getHash(key);
+        HashNode<K, V> newNode = new HashNode<>(key, value);
 
         if (table.get(index) == null) {
             table.set(index, newNode);
         } else {
-            Node<K, V> current = table.get(index);
+            HashNode<K, V> current = table.get(index);
             while (current.getNext() != null) {
-                current = (Node<K, V>) current.getNext();
+                current = current.getNext();
             }
             current.setNext(newNode);
         }
@@ -34,14 +34,14 @@ public class HashTable<K, V> implements IHashTable<K, V> {
 
     @Override
     public V get(K key) {
-        int index = getIndex(key);
-        Node<K, V> current = table.get(index);
+        int index = getHash(key);
+        HashNode<K, V> current = table.get(index);
 
         while (current != null) {
             if (current.getKey().equals(key)) {
                 return current.getValue();
             }
-            current = (Node<K, V>) current.getNext();
+            current = current.getNext();
         }
 
         return null;
@@ -49,14 +49,14 @@ public class HashTable<K, V> implements IHashTable<K, V> {
 
     @Override
     public boolean containsKey(K key) {
-        int index = getIndex(key);
-        Node<K, V> current = table.get(index);
+        int index = getHash(key);
+        HashNode<K, V> current = table.get(index);
 
         while (current != null) {
             if (current.getKey().equals(key)) {
                 return true;
             }
-            current = (Node<K, V>) current.getNext();
+            current = current.getNext();
         }
 
         return false;
@@ -64,22 +64,22 @@ public class HashTable<K, V> implements IHashTable<K, V> {
 
     @Override
     public void remove(K key) {
-        int index = getIndex(key);
-        Node<K, V> current = table.get(index);
-        Node<K, V> prev = null;
+        int index = getHash(key);
+        HashNode<K, V> current = table.get(index);
+        HashNode<K, V> prev = null;
 
         while (current != null) {
             if (current.getKey().equals(key)) {
                 if (prev != null) {
                     prev.setNext(current.getNext());
                 } else {
-                    table.set(index, (Node<K, V>) current.getNext());
+                    table.set(index, current.getNext());
                 }
                 size--;
                 return;
             }
             prev = current;
-            current = (Node<K, V>) current.getNext();
+            current = current.getNext();
         }
     }
 
@@ -88,14 +88,19 @@ public class HashTable<K, V> implements IHashTable<K, V> {
         return size;
     }
 
-    @Override
-    public int hash() {
-        //TODO implement hash function
-        return 0;
-    }
-
-    private int getIndex(K key) {
+    private int getHash(K key) {
         int hashCode = key.hashCode();
         return Math.abs(hashCode % table.size());
+    }
+
+    public V[] values() {
+        ArrayList<V> values = new ArrayList<>();
+        for (HashNode<K, V> node : table) {
+            while (node != null) {
+                values.add(node.getValue());
+                node = node.getNext();
+            }
+        }
+        return (V[]) values.toArray();
     }
 }

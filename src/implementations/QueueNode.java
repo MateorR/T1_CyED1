@@ -1,4 +1,4 @@
-package model;
+package implementations;
 
 public class QueueNode<T> {
     private QueueNode<T> behind;
