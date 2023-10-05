@@ -2,7 +2,7 @@ package model;
 
 import implementations.HashTable;
 
-public class Controller {
+public class ReMeManager {
 
     private final HashTable<String, Assignment> tasks = new HashTable<>();
     public String addAssignment(String title, String description, String dueDate, boolean priority, boolean type) {

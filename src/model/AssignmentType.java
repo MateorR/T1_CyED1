@@ -1,6 +1,6 @@
 package model;
 
-public enum Type {
+public enum AssignmentType {
     TASK,
     REMINDER
 }

@@ -8,7 +8,7 @@ public class Assignment {
     private Timestamp dueDate;
     private boolean priority;
     private boolean isComplete;
-    private final Type type;
+    private final AssignmentType type;
     public Assignment(String title, String description, String dueDate, boolean priority, boolean isComplete, boolean type) {
         this.title = title;
         this.description = description;
@@ -16,15 +16,15 @@ public class Assignment {
         this.priority = priority;
         this.isComplete = isComplete;
         if (type) {
-            this.type = Type.TASK;
+            this.type = AssignmentType.TASK;
         } else {
-            this.type = Type.REMINDER;
+            this.type = AssignmentType.REMINDER;
         }
     }
     public boolean isTasks(){
-        return type.equals(Type.TASK);
+        return type.equals(AssignmentType.TASK);
     }
     public boolean isReminder(){
-        return type.equals(Type.REMINDER);
+        return type.equals(AssignmentType.REMINDER);
     }
 }

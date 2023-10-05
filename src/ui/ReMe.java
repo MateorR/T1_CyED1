@@ -2,13 +2,13 @@ package ui;
 
 
 
-import model.Controller;
+import model.ReMeManager;
 
 import java.util.Scanner;
 
-public class Main {
+public class ReMe {
 
-    public static final Controller controller = new Controller();
+    public static final ReMeManager controller = new ReMeManager();
     public static final Scanner input = new Scanner(System.in);
     public static void main(String[] args) {
         int option;
