@@ -1,5 +1,7 @@
 package model;
 
+import implementations.interfaces.Stackable;
+
 public class Stack<T> implements Stackable<T> {
     private StackNode<T> top;
 

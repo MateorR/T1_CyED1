@@ -1,4 +1,4 @@
-package model;
+package implementations.interfaces;
 
 public interface Stackable<T> {
     public void push(T value);

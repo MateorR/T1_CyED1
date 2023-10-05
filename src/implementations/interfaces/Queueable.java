@@ -1,4 +1,4 @@
-package model;
+package implementations.interfaces;
 
 public interface Queueable<T> {
     public void enqueue(T value);

@@ -1,8 +1,10 @@
 package model;
 
+import implementations.interfaces.Prioritable;
+
 import java.util.ArrayList;
 
-public class PriorityQueue<T extends Comparable<T>> implements Prioritable<T>{
+public class PriorityQueue<T extends Comparable<T>> implements Prioritable<T> {
 
     private ArrayList<T> elements;
     private int heapSize;

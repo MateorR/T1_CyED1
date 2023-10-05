@@ -1,6 +1,8 @@
 package model;
 
-public class Queue<T> implements Queueable<T>{
+import implementations.interfaces.Queueable;
+
+public class Queue<T> implements Queueable<T> {
     private QueueNode<T> front;
     private QueueNode<T> back;
 
