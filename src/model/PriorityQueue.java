@@ -62,20 +62,6 @@ public class PriorityQueue<T extends Comparable<T>> implements Prioritable<T>{
     }
 
     @Override
-    public T extractMin() {
-        int last = elements.size() - 1;
-        if (!isEmpty()) {
-            T min = elements.get(0);
-            elements.set(0, elements.get(last));
-            elements.remove(last);
-            minHeapify(0);
-            return min;
-        } else {
-            return null;
-        }
-    }
-
-    @Override
     public void increaseKey(int i, T key) {
         if (key.compareTo(elements.get(i))>0) {
             elements.set(i, key);
@@ -146,5 +132,6 @@ public class PriorityQueue<T extends Comparable<T>> implements Prioritable<T>{
             maxHeapify(low);
         }
     }
+
 }
 

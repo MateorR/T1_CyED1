@@ -27,14 +27,17 @@ public class Stack<T> implements Stackable<T> {
     }
 
     @Override
-    public void pop() {
-        if (top != null) {
+    public T pop() {
+        T value = null;
+        if (!isEmpty()) {
+            value = top.getValue();
             if (top.getUnder() == null) {
                 top = null;
             } else {
                 top = top.getUnder();
             }
         }
+        return value;
     }
 
     @Override
