@@ -5,8 +5,8 @@ import implementations.HashTable;
 public class Controller {
 
     private final HashTable<String, Assignment> tasks = new HashTable<>();
-    public String addAssignment(String title, String description, String dueDate, boolean priority, boolean isComplete, boolean type) {
-        Assignment assignment = new Assignment(title, description, dueDate, priority, isComplete, true);
+    public String addAssignment(String title, String description, String dueDate, boolean priority, boolean type) {
+        Assignment assignment = new Assignment(title, description, dueDate, priority, false, type);
         tasks.add(title, assignment);
         return "Tasks added successful";
     }

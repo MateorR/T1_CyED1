@@ -26,11 +26,9 @@ public class Main {
                     String dueDate = input.next();
                     System.out.println("Enter the priority: ");
                     boolean priority = input.nextBoolean();
-                    System.out.println("Enter the is complete: ");
-                    boolean isComplete = input.nextBoolean();
                     System.out.println("Enter the type (0: task, 1: reminder): ");
                     boolean type = input.nextBoolean();
-                    System.out.println(controller.addAssignment(title, description, dueDate, priority, isComplete, type));
+                    System.out.println(controller.addAssignment(title, description, dueDate, priority, type));
                 }
                 case 2 -> System.out.println(controller.showTasks());
                 case 3 -> System.out.println(controller.showReminders());
