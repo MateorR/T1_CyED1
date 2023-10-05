@@ -103,4 +103,8 @@ public class HashTable<K, V> implements IHashTable<K, V> {
         }
         return (V[]) values.toArray();
     }
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
 }

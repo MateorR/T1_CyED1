@@ -5,19 +5,16 @@ import implementations.HashTable;
 public class Controller {
 
     private final HashTable<String, Assignment> tasks = new HashTable<>();
-    public String addTask(String title, String description, String dueDate, boolean priority, boolean isComplete) {
+    public String addAssignment(String title, String description, String dueDate, boolean priority, boolean isComplete, boolean type) {
         Assignment assignment = new Assignment(title, description, dueDate, priority, isComplete, true);
         tasks.add(title, assignment);
         return "Tasks added successful";
     }
 
-    public String addReminder(String title, String description, String dueDate, boolean priority, boolean isComplete) {
-        Assignment assignment = new Assignment(title, description, dueDate, priority, isComplete, false);
-        tasks.add(title, assignment);
-        return "Reminder added successful";
-    }
-
     public String showTasks() {
+        if (tasks.isEmpty()) {
+            return "There are no tasks";
+        }
         StringBuilder stringBuilder = new StringBuilder();
         for (Assignment assignment : tasks.values()) {
             if (assignment.isTasks()) {
@@ -28,6 +25,9 @@ public class Controller {
     }
 
     public String showReminders() {
+        if (tasks.isEmpty()) {
+            return "There are no reminders";
+        }
         StringBuilder stringBuilder = new StringBuilder();
         for (Assignment assignment : tasks.values()) {
             if (assignment.isReminder()) {
@@ -38,6 +38,9 @@ public class Controller {
     }
 
     public String showAll() {
+        if (tasks.isEmpty()) {
+            return "There are no assignments";
+        }
         StringBuilder stringBuilder = new StringBuilder();
         for (Assignment assignment : tasks.values()) {
             stringBuilder.append(assignment);
