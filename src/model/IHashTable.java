@@ -6,4 +6,6 @@ public interface IHashTable<K, V> {
     boolean containsKey(K key);
     void remove(K key);
     int length();
+
+    int hash();
 }

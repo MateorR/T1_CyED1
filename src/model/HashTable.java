@@ -1,20 +1,15 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class HashTable<K, V> implements IHashTable<K, V> {
     private static final int DEFAULT_CAPACITY = 10;
-    private final List<Node<K, V>> table;
+    private final ArrayList<Node<K, V>> table;
     private int size;
 
     public HashTable() {
-        this(DEFAULT_CAPACITY);
-    }
-
-    public HashTable(int capacity) {
-        this.table = new ArrayList<>(capacity);
-        for (int i = 0; i < capacity; i++) {
+        this.table = new ArrayList<>(DEFAULT_CAPACITY);
+        for (int i = 0; i < DEFAULT_CAPACITY; i++) {
             this.table.add(null);
         }
         this.size = 0;
@@ -91,6 +86,12 @@ public class HashTable<K, V> implements IHashTable<K, V> {
     @Override
     public int length() {
         return size;
+    }
+
+    @Override
+    public int hash() {
+        //TODO implement hash function
+        return 0;
     }
 
     private int getIndex(K key) {
