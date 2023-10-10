@@ -9,27 +9,10 @@ public class Queue<T> implements Queueable<T> {
         back = null;
     }
 
-    public QueueNode<T> getFront() {
-        return front;
-    }
-
-    public void setFront(QueueNode<T> front) {
-        this.front = front;
-    }
-
-    public QueueNode<T> getBack() {
-        return back;
-    }
-
-    public void setBack(QueueNode<T> back) {
-        this.back = back;
-    }
-
-
     @Override
     public void enqueue(T value) {
         QueueNode<T> node = new QueueNode<T>(value);
-        if (front == null) {
+        if (isEmpty()) {
             front = node;
         } else {
             back.setBehind(node);
@@ -38,31 +21,27 @@ public class Queue<T> implements Queueable<T> {
     }
 
     @Override
-    public T front() {
+    public T peek() {
         T value = null;
-        if (front != null) {
-            value= front.getValue();
+        if (!isEmpty()) {
+            value = front.getValue();
         }
         return value;
     }
 
     @Override
-    public T back() {
+    public T dequeue() {
         T value = null;
-        if (back != null) {
-            value= back.getValue();
+        if (!isEmpty()) {
+            value = front.getValue();
+            if(front.getBehind()!=null){
+                front = front.getBehind();
+            } else {
+                front=null;
+                back=null;
+            }
         }
         return value;
-    }
-
-    @Override
-    public void dequeue() {
-        if (front != null) {
-            front = front.getBehind();
-        }
-        if (front == null) {
-            back = null;
-        }
     }
 
     @Override
@@ -72,5 +51,18 @@ public class Queue<T> implements Queueable<T> {
             empty = true;
         }
         return empty;
+    }
+
+    @Override
+    public int size() {
+        int size=0;
+        if (!isEmpty()) {
+            QueueNode<T> node = front;
+            while (node != null) {
+                size++;
+                node = node.getBehind();
+            }
+        }
+        return size;
     }
 }

@@ -86,7 +86,7 @@ public class PriorityQueue<T extends Comparable<T>> implements Prioritable<T>{
         if (key.compareTo(elements.get(i))<0) {
             elements.set(i, key);
             i++;
-            while (i>0 && elements.get((i/2)-1).compareTo(elements.get(i-1))<0) {
+            while (i>0 && elements.get((i/2)-1).compareTo(elements.get(i-1))>0) {
                 T temp = elements.get(i-1);
                 elements.set(i-1, elements.get((i/2)-1));
                 elements.set((i/2)-1, temp);
@@ -126,6 +126,14 @@ public class PriorityQueue<T extends Comparable<T>> implements Prioritable<T>{
             this.heapSize--;
             maxHeapify(0);
         }
+    }
+
+    public int getHeapSize(){
+        return elements.size()-1;
+    }
+
+    public T getElem(int i){
+        return elements.get(i);
     }
 }
 

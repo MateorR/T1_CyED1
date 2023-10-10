@@ -19,15 +19,17 @@ public class ReMe {
             switch (option) {
                 case 1 -> {
                     System.out.println("Enter the title: ");
-                    String title = input.next();
+                    String title = input.nextLine();
                     System.out.println("Enter the description: ");
-                    String description = input.next();
+                    String description = input.nextLine();
                     System.out.println("Enter the due date: ");
-                    String dueDate = input.next();
-                    System.out.println("Enter the priority: ");
-                    boolean priority = input.nextBoolean();
+                    String dueDate = input.nextLine();;
+                    System.out.println("Enter the priority, in a scale from 1 to 5, and 0 if it has no priority: ");
+                    int priority = input.nextInt();
+                    input.nextLine();
                     System.out.println("Enter the type (0: task, 1: reminder): ");
-                    boolean type = input.nextBoolean();
+                    int type = input.nextInt();
+                    input.nextLine();
                     System.out.println(controller.addAssignment(title, description, dueDate, priority, type));
                 }
                 case 2 -> System.out.println(controller.showTasks());
