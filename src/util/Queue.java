@@ -65,4 +65,12 @@ public class Queue<T> implements Queueable<T> {
         }
         return size;
     }
+
+    public void enqueueTop(T value) {
+        QueueNode<T> node = new QueueNode<T>(value);
+        if (!isEmpty()) {
+            node.setBehind(front);
+        }
+        front = node;
+    }
 }

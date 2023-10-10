@@ -135,5 +135,14 @@ public class PriorityQueue<T extends Comparable<T>> implements Prioritable<T>{
     public T getElem(int i){
         return elements.get(i);
     }
+
+    public T getElem(T elem){
+        for (int i = 0; i < elements.size(); i++) {
+            if(elements.get(i).equals(elem)){
+                return elements.get(i);
+            }
+        }
+        return null;
+    }
 }
 

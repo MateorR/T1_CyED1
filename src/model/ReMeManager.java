@@ -8,17 +8,19 @@ public class ReMeManager {
 
     private final HashTable<String, Assignment> tasks = new HashTable<>();
     private PriorityQueue<Assignment> prioAssignments  = new PriorityQueue<>();
-
     private Queue<Assignment> nonPriorityAssg = new Queue<>();
+    private Stack<Action> undoStack = new Stack<>();
+
+    public ReMeManager() {
+    }
 
     public String addAssignment(String title, String description, String dueDate, int priority, int type) {
         Assignment assignment = new Assignment(title, description, dueDate, priority, false, type);
         tasks.add(title, assignment);
         if (priority == 0) {
             nonPriorityAssg.enqueue(assignment);
-        } else {
-            prioAssignments.insert(assignment);
         }
+        undoStack.push(new Action(0, assignment));
         return AssignmentType.values()[type] + " added successful";
     }
 
@@ -58,37 +60,47 @@ public class ReMeManager {
         }
         return stringBuilder.toString();
     }
-
+    public void buildPriorityAssignments() {
+        if (!tasks.isEmpty()) {
+            for (Assignment assignment : tasks.values()) {
+                prioAssignments.insert(assignment);
+            }
+        }
+    }
     public String showPriorityAssignments() {
-        if (prioAssignments.isEmpty()) {
-            return "There are no priority assignments";
-        }
+        buildPriorityAssignments();
         prioAssignments.heapSort();
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i=prioAssignments.getHeapSize(); i>=0; i--) {
-            stringBuilder.append(prioAssignments.getElem(i));
+        if (!prioAssignments.isEmpty()) {
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int i=prioAssignments.getHeapSize(); i>=0; i--) {
+                stringBuilder.append(prioAssignments.getElem(i));
+            }
+            prioAssignments = new PriorityQueue<>();
+            return stringBuilder.toString();
         }
-        return stringBuilder.toString();
+        return "There are no priority assignments";
     }
 
     public String showPriorityAssignemntsByDate() {
-        if (prioAssignments.isEmpty()) {
-            return "There are no priority assignments";
+        buildPriorityAssignments();
+        if (!prioAssignments.isEmpty()) {
+            ArrayList<Assignment> aux = new ArrayList<>();
+            aux= prioAssignments.getElements();
+            StringBuilder stringBuilder = new StringBuilder();
+            for (Assignment assignment : sortByDate(aux)) {
+                stringBuilder.append(assignment);
+            }
+            return stringBuilder.toString();
         }
-        ArrayList<Assignment> aux = new ArrayList<>();
-        aux= prioAssignments.getElements();
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Assignment assignment : sortByDate(aux)) {
-            stringBuilder.append(assignment);
-        }
-        return stringBuilder.toString();
+        prioAssignments = new PriorityQueue<>();
+        return "There are no priority assignments";
     }
 
     private ArrayList<Assignment> sortByDate(ArrayList<Assignment> assg) {
         int n = assg.size();
         for (int i = 0; i < n - 1 ; i++) {
             for (int j = i+1; j < n; j++) {
-                if(assg.get(i).compareDate(assg.get(j)) > 0){
+                if(assg.get(i).compareDate(assg.get(j)) < 0){
                     Assignment prev = assg.get(i);
                     Assignment current = assg.get(j);
                     assg.set(i , current);
@@ -99,11 +111,18 @@ public class ReMeManager {
         return assg;
     }
 
-    public String showNonPriorityAssignments() {
-        if (nonPriorityAssg.isEmpty()) {
-            return "There are no non priority assignments";
+    private void buildNonPriorityAssignments() {
+        if (!tasks.isEmpty()) {
+            for (Assignment assignment : tasks.values()) {
+                nonPriorityAssg.enqueue(assignment);
+            }
         }
-        return String.valueOf(showNonPriorityAssignments(nonPriorityAssg));
+    }
+    public String showNonPriorityAssignments() {
+        if (!nonPriorityAssg.isEmpty()) {
+            return String.valueOf(showNonPriorityAssignments(nonPriorityAssg));
+        }
+        return "There are no non priority assignments";
     }
 
     private StringBuilder showNonPriorityAssignments(Queue<Assignment> queue) {
@@ -121,6 +140,8 @@ public class ReMeManager {
         if (tasks.isEmpty()) {
             return "There are no assignments";
         }
+
+        undoStack.push(new Action(2, tasks.get(title)));
         return ":)";
     }
 
@@ -128,9 +149,37 @@ public class ReMeManager {
         if (tasks.isEmpty()) {
             return "There are no assignments";
         }
+
+        undoStack.push(new Action(1, tasks.get(title)));
         return ";)";
     }
 
-
-
+    public String undo(){
+        String msg = "There are no actions to undo";
+        if (!undoStack.isEmpty()) {
+            Action action = undoStack.pop();
+            msg = "Undo successful";
+            switch (action.getType()) {
+                case 0:
+                    tasks.remove(action.getTitleAssg());
+                    if (action.getPriorityAssg() == 0){
+                        nonPriorityAssg.dequeue();
+                    }
+                    break;
+                case 1:
+                    tasks.remove(action.getTitleAssg());
+                    tasks.add(action.getTitleAssg(), action.getAssignment());
+                    if (action.getPriorityAssg() == 0) {
+                        buildNonPriorityAssignments();
+                    };
+                case 2:
+                    tasks.add(action.getTitleAssg(), action.getAssignment());
+                    if (action.getPriorityAssg() == 0) {
+                        nonPriorityAssg.enqueueTop(action.getAssignment());
+                    }
+                    break;
+            }
+        }
+        return msg;
+    }
 }

@@ -10,7 +10,7 @@ public class Stack<T> implements Stackable<T> {
     @Override
     public void push(T value) {
         StackNode<T> node = new StackNode<T>(value);
-        if (top != null) {
+        if (!isEmpty()) {
             node.setUnder(top);
         }
         top = node;
@@ -20,7 +20,7 @@ public class Stack<T> implements Stackable<T> {
     @Override
     public T top() {
         T value = null;
-        if (top != null) {
+        if (!isEmpty()) {
             value = top.getValue();
         }
         return value;
@@ -30,10 +30,11 @@ public class Stack<T> implements Stackable<T> {
     public T pop() {
         T value = null;
         if (!isEmpty()) {
-            value = top.getValue();
             if (top.getUnder() == null) {
+                value = top.getValue();
                 top = null;
             } else {
+                value = top.getValue();
                 top = top.getUnder();
             }
         }
