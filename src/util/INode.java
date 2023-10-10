@@ -1,4 +1,4 @@
-package implementations;
+package util;
 
 public interface INode<K, V> {
     K getKey();

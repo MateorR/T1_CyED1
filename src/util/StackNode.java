@@ -1,4 +1,4 @@
-package implementations;
+package util;
 
 public class StackNode<T> {
     private StackNode<T> under;

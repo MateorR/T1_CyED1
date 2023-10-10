@@ -1,4 +1,4 @@
-package implementations;
+package util;
 
 public interface Queueable<T> {
     public void enqueue(T value);

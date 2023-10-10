@@ -1,4 +1,4 @@
-package implementations;
+package util;
 
 public class Queue<T> implements Queueable<T> {
     private QueueNode<T> front;

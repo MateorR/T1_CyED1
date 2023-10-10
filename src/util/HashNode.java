@@ -1,4 +1,4 @@
-package implementations;
+package util;
 
 public class HashNode<K, V> implements INode<K, V> {
     private final K key;

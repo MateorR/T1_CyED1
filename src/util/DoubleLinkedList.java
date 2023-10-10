@@ -1,4 +1,4 @@
-package implementations;
+package util;
 
 public class DoubleLinkedList<K, T> {
     private HashNode<K, T> head;

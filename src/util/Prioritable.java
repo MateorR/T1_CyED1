@@ -1,4 +1,4 @@
-package implementations;
+package util;
 
 public interface Prioritable<T> {
     public T front();
@@ -16,8 +16,5 @@ public interface Prioritable<T> {
 
     public void maxHeapify(int i);
 
-    public void minHeapify(int i);
-
-
-
+    public void heapSort();
 }

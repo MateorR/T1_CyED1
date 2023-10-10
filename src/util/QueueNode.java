@@ -1,4 +1,4 @@
-package implementations;
+package util;
 
 public class QueueNode<T> {
     private QueueNode<T> behind;

@@ -1,4 +1,4 @@
-package implementations;
+package util;
 
 public interface IHashTable<K, V> {
     void add(K key, V value);

@@ -1,4 +1,4 @@
-package implementations;
+package util;
 
 public class Stack<T> implements Stackable<T> {
     private StackNode<T> top;
