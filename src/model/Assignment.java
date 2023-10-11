@@ -9,6 +9,7 @@ public class Assignment implements Comparable<Assignment> {
     private int priority;
     private boolean isComplete;
     private AssignmentType type;
+
     public Assignment(String title, String description, String dueDate, int priority, boolean isComplete, int type) {
         this.title = title;
         this.description = description;
@@ -100,13 +101,7 @@ public class Assignment implements Comparable<Assignment> {
         } else if (this.dueDate.before(o.dueDate)) {
             result = 1;
         } else {
-            if (this.priority > o.priority) {
-                result = 1;
-            } else if (this.priority < o.priority) {
-                result = -1;
-            } else {
-                result = 0;
-            }
+            result = Integer.compare(this.priority, o.priority);
         }
         return result;
     }

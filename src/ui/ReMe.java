@@ -1,7 +1,6 @@
 package ui;
 
 
-
 import model.ReMeManager;
 
 import java.util.Scanner;
@@ -10,6 +9,7 @@ public class ReMe {
 
     public static final ReMeManager controller = new ReMeManager();
     public static final Scanner input = new Scanner(System.in);
+
     public static void main(String[] args) {
         int option;
         do {
@@ -23,7 +23,7 @@ public class ReMe {
                     System.out.println("Enter the description: ");
                     String description = input.nextLine();
                     System.out.println("Enter the due date: ");
-                    String dueDate = input.nextLine();;
+                    String dueDate = input.nextLine();
                     System.out.println("Enter the priority, in a scale from 1 to 5, and 0 if it has no priority: ");
                     int priority = input.nextInt();
                     input.nextLine();

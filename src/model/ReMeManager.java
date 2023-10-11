@@ -72,7 +72,7 @@ public class ReMeManager {
     public String showPriorityAssignments() {
         buildPriorityAssignments();
         priorityAssignments.heapSort();
-        if (!priorityAssignments.isEmpty()) {
+        if (priorityAssignments.isEmpty()) {
             StringBuilder stringBuilder = new StringBuilder();
             for (int i = priorityAssignments.getHeapSize(); i >= 0; i--) {
                 stringBuilder.append(priorityAssignments.getElem(i));
@@ -85,7 +85,7 @@ public class ReMeManager {
 
     public String showPriorityAssignmentsByDate() {
         buildPriorityAssignments();
-        if (!priorityAssignments.isEmpty()) {
+        if (priorityAssignments.isEmpty()) {
             ArrayList<Assignment> aux = new ArrayList<>();
             aux = priorityAssignments.getElements();
             StringBuilder stringBuilder = new StringBuilder();
@@ -159,26 +159,26 @@ public class ReMeManager {
 
     public String undo() {
         String msg = "There are no actions to undo";
-        if (!undoStack.isEmpty()) {
+        if (undoStack.isEmpty()) {
             Action action = undoStack.pop();
             msg = "Undo successful";
             switch (action.getType()) {
                 case 0:
-                    tasks.remove(action.getTitleAssg());
-                    if (action.getPriorityAssg() == 0) {
+                    tasks.remove(action.getTitleAssignment());
+                    if (action.getPriorityAssignment() == 0) {
                         nonPriorityAssignments.dequeue();
                     }
                     break;
                 case 1:
-                    tasks.remove(action.getTitleAssg());
-                    tasks.add(action.getTitleAssg(), action.getAssignment());
-                    if (action.getPriorityAssg() == 0) {
+                    tasks.remove(action.getTitleAssignment());
+                    tasks.add(action.getTitleAssignment(), action.getAssignment());
+                    if (action.getPriorityAssignment() == 0) {
                         buildNonPriorityAssignments();
                     }
                     ;
                 case 2:
-                    tasks.add(action.getTitleAssg(), action.getAssignment());
-                    if (action.getPriorityAssg() == 0) {
+                    tasks.add(action.getTitleAssignment(), action.getAssignment());
+                    if (action.getPriorityAssignment() == 0) {
                         nonPriorityAssignments.enqueueTop(action.getAssignment());
                     }
                     break;

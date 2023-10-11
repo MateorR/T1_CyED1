@@ -3,6 +3,7 @@ package model;
 public class Action {
     private int type; // 0 add, 1 modify, 2 delete/complete
     private Assignment assignment;
+
     public Action(int type, Assignment assignment) {
         this.type = type;
         this.assignment = assignment;
@@ -24,11 +25,11 @@ public class Action {
         this.assignment = assignment;
     }
 
-    public String getTitleAssg() {
+    public String getTitleAssignment() {
         return assignment.getTitle();
     }
 
-    public int getPriorityAssg() {
+    public int getPriorityAssignment() {
         return assignment.getPriority();
     }
 }

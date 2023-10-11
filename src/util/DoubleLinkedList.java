@@ -30,10 +30,10 @@ public class DoubleLinkedList<K, T> {
         while (currentNode != null) {
             if (currentNode.getKey().equals(key)) {
                 if (currentNode == head) {
-                    head = (HashNode<K, T>) currentNode.getNext();
+                    head = currentNode.getNext();
                     head.setPrevious(null);
                 } else if (currentNode == tail) {
-                    tail = (HashNode<K, T>) currentNode.getPrevious();
+                    tail = currentNode.getPrevious();
                     tail.setNext(null);
                 } else {
                     currentNode.getPrevious().setNext(currentNode.getNext());
@@ -42,7 +42,7 @@ public class DoubleLinkedList<K, T> {
                 size--;
                 return "The node was removed";
             }
-            currentNode = (HashNode<K, T>) currentNode.getNext();
+            currentNode = currentNode.getNext();
         }
         return "The node was not found";
     }
@@ -65,7 +65,7 @@ public class DoubleLinkedList<K, T> {
             if (currentNode.getKey().equals(key1)) {
                 return currentNode;
             }
-            currentNode = (HashNode<K, T>) currentNode.getNext();
+            currentNode = currentNode.getNext();
         }
         return null;
     }
@@ -78,7 +78,7 @@ public class DoubleLinkedList<K, T> {
             if (currentNode.getNext() != null) {
                 stringBuilder.append("->");
             }
-            currentNode = (HashNode<K, T>) currentNode.getNext();
+            currentNode = currentNode.getNext();
         }
         return stringBuilder.toString();
     }

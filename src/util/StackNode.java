@@ -3,16 +3,16 @@ package util;
 public class StackNode<T> {
     private StackNode<T> under;
     private T value;
-    
+
     public StackNode(T value) {
         this.value = value;
         under = null;
     }
-    
+
     public T getValue() {
         return value;
     }
-    
+
     public void setValue(T value) {
         this.value = value;
     }

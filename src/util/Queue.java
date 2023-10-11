@@ -34,11 +34,11 @@ public class Queue<T> implements Queueable<T> {
         T value = null;
         if (!isEmpty()) {
             value = front.getValue();
-            if(front.getBehind()!=null){
+            if (front.getBehind() != null) {
                 front = front.getBehind();
             } else {
-                front=null;
-                back=null;
+                front = null;
+                back = null;
             }
         }
         return value;
@@ -46,16 +46,12 @@ public class Queue<T> implements Queueable<T> {
 
     @Override
     public boolean isEmpty() {
-        boolean empty = false;
-        if (front == null) {
-            empty = true;
-        }
-        return empty;
+        return front == null;
     }
 
     @Override
     public int size() {
-        int size=0;
+        int size = 0;
         if (!isEmpty()) {
             QueueNode<T> node = front;
             while (node != null) {

@@ -4,6 +4,7 @@ public interface Prioritable<T> {
     public T front();
 
     public T back();
+
     public boolean isEmpty();
 
     public void insert(T elem);
