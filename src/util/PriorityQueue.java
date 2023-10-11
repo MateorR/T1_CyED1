@@ -142,5 +142,18 @@ public class PriorityQueue<T extends Comparable<T>> implements Prioritable<T> {
         }
         return null;
     }
+
+    public void remove (T elem) {
+        if (isEmpty()) {
+            int i = 0;
+            while (i < elements.size()) {
+                if (elements.get(i).equals(elem)) {
+                    elements.remove(i);
+                    return;
+                }
+                i++;
+            }
+        }
+    }
 }
 

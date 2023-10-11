@@ -148,15 +148,6 @@ public class ReMeManager {
         return ":)";
     }
 
-    public String modifyAssignment(String title) {
-        if (tasks.isEmpty()) {
-            return "There are no assignments";
-        }
-
-        undoStack.push(new Action(1, tasks.get(title)));
-        return ";)";
-    }
-
     public String undo() {
         String msg = "There are no actions to undo";
         if (undoStack.isEmpty()) {
@@ -185,5 +176,67 @@ public class ReMeManager {
             }
         }
         return msg;
+    }
+
+    public String removeAssignment(String title) {
+        if (tasks.isEmpty()) {
+            return "There are no assignments";
+        }
+        for (Assignment assignment : tasks.values()) {
+            if (assignment.getTitle().equals(title)) {
+                tasks.remove(title);
+                if (assignment.getPriority() == 0) {
+                    nonPriorityAssignments.remove(assignment);
+                }
+                if (assignment.getPriority() > 0) {
+                    priorityAssignments.remove(assignment);
+                }
+                break;
+            }
+        }
+        undoStack.push(new Action(0, tasks.get(title)));
+        return "Assignment removed successful";
+    }
+
+    public Assignment getAssignment(String title) {
+        if (tasks.isEmpty()) {
+            return null;
+        }
+        for (Assignment assignment : tasks.values()) {
+            if (assignment.getTitle().equals(title)) {
+                return assignment;
+            }
+        }
+        return null;
+    }
+
+    public String modifyAssignment(String title, String newTitle, String newDescription, String newDueDate, int newPriority) {
+        if (tasks.isEmpty()) {
+            return "There are no assignments";
+        }
+
+        Assignment assignment = getAssignment(title);
+
+        if (assignment == null) {
+            return "There is no assignment with that title";
+        }
+
+        if (assignment.getPriority() == 0 && newPriority > 0) {
+            nonPriorityAssignments.remove(assignment);
+            priorityAssignments.insert(assignment);
+        }
+
+        if (assignment.getPriority() > 0 && newPriority == 0) {
+            priorityAssignments.remove(assignment);
+            nonPriorityAssignments.enqueue(assignment);
+        }
+
+        assignment.setTitle(newTitle);
+        assignment.setDescription(newDescription);
+        assignment.setDueDate(newDueDate);
+        assignment.setPriority(newPriority);
+
+        undoStack.push(new Action(1, tasks.get(title)));
+        return "Assignment modified successful";
     }
 }

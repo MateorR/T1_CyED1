@@ -69,4 +69,23 @@ public class Queue<T> implements Queueable<T> {
         }
         front = node;
     }
+
+    public void remove(T value) {
+        if (isEmpty()) {
+            QueueNode<T> node = front;
+            QueueNode<T> prev = null;
+            while (node != null) {
+                if (node.getValue().equals(value)) {
+                    if (prev == null) {
+                        front = node.getBehind();
+                    } else {
+                        prev.setBehind(node.getBehind());
+                    }
+                    break;
+                }
+                prev = node;
+                node = node.getBehind();
+            }
+        }
+    }
 }

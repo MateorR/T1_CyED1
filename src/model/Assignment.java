@@ -39,8 +39,8 @@ public class Assignment implements Comparable<Assignment> {
         return dueDate;
     }
 
-    public void setDueDate(Timestamp dueDate) {
-        this.dueDate = dueDate;
+    public void setDueDate(String dueDate) {
+        this.dueDate = Timestamp.valueOf(dueDate);
     }
 
     public int getPriority() {
