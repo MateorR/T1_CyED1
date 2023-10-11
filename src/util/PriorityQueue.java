@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class PriorityQueue<T extends Comparable<T>> implements Prioritable<T>{
 
-    private ArrayList<T> elements;
+    private final ArrayList<T> elements;
     private int heapSize;
     public PriorityQueue() {
         elements = new ArrayList<T>();
@@ -33,11 +33,7 @@ public class PriorityQueue<T extends Comparable<T>> implements Prioritable<T>{
 
     @Override
     public boolean isEmpty() {
-        boolean result = false;
-        if (elements.isEmpty()) {
-            result = true;
-        }
-        return result;
+        return elements.isEmpty();
     }
 
     @Override
@@ -137,9 +133,9 @@ public class PriorityQueue<T extends Comparable<T>> implements Prioritable<T>{
     }
 
     public T getElem(T elem){
-        for (int i = 0; i < elements.size(); i++) {
-            if(elements.get(i).equals(elem)){
-                return elements.get(i);
+        for (T element : elements) {
+            if (element.equals(elem)) {
+                return element;
             }
         }
         return null;
