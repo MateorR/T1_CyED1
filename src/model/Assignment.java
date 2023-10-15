@@ -106,5 +106,9 @@ public class Assignment implements Comparable<Assignment> {
         return result;
     }
 
+    @Override
+    public String toString() {
+        return title + " " + description + " " + dueDate + " " + priority + " " + isComplete + " " + type + "\n";
+    }
 
 }

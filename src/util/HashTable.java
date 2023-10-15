@@ -93,7 +93,7 @@ public class HashTable<K, V> implements IHashTable<K, V> {
         return Math.abs(hashCode % table.size());
     }
 
-    public V[] values() {
+    public ArrayList<V> values() {
         ArrayList<V> values = new ArrayList<>();
         for (HashNode<K, V> node : table) {
             while (node != null) {
@@ -101,10 +101,14 @@ public class HashTable<K, V> implements IHashTable<K, V> {
                 node = node.getNext();
             }
         }
-        return (V[]) values.toArray();
+        return values;
     }
 
     public boolean isEmpty() {
         return size == 0;
+    }
+    public void clear() {
+        table.clear();
+        size = 0;
     }
 }

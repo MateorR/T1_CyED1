@@ -64,7 +64,9 @@ public class ReMeManager {
     public void buildPriorityAssignments() {
         if (!tasks.isEmpty()) {
             for (Assignment assignment : tasks.values()) {
-                priorityAssignments.insert(assignment);
+                if (assignment.getPriority() != 0) {
+                    priorityAssignments.insert(assignment);
+                }
             }
         }
     }
@@ -86,7 +88,7 @@ public class ReMeManager {
     public String showPriorityAssignmentsByDate() {
         buildPriorityAssignments();
         if (!priorityAssignments.isEmpty()) {
-            ArrayList<Assignment> aux = new ArrayList<>();
+            ArrayList<Assignment> aux;
             aux = priorityAssignments.getElements();
             StringBuilder stringBuilder = new StringBuilder();
             for (Assignment assignment : sortByDate(aux)) {
@@ -117,7 +119,9 @@ public class ReMeManager {
     private void buildNonPriorityAssignments() {
         if (!tasks.isEmpty()) {
             for (Assignment assignment : tasks.values()) {
-                nonPriorityAssignments.enqueue(assignment);
+                if (assignment.getPriority() == 0) {
+                    nonPriorityAssignments.enqueue(assignment);
+                }
             }
         }
     }
@@ -192,5 +196,12 @@ public class ReMeManager {
         }
         undoStack.push(new Action(1, tasks.get(title)));
         return "Assignment modified successful";
+    }
+
+    public Assignment findAssignment(String title) {
+        if (tasks.isEmpty()) {
+            return null;
+        }
+        return tasks.get(title);
     }
 }
