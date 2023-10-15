@@ -6,7 +6,7 @@ import org.junit.jupiter.api.*;
 
 public class PriorityQueueTest {
     @Test
-    public void testStandardCase() {
+    void testStandardCase() {
         PriorityQueue<Integer> queue = new PriorityQueue<>();
         queue.insert(2);
         queue.insert(1);
@@ -19,7 +19,7 @@ public class PriorityQueueTest {
     }
 
     @Test
-    public void testLimitCase() {
+    void testLimitCase() {
         PriorityQueue<Integer> queue = new PriorityQueue<>();
         assertTrue(queue.isEmpty());
         assertNull(queue.front());
@@ -34,7 +34,7 @@ public class PriorityQueueTest {
     }
 
     @Test
-    public void testRandomCase() {
+    void testRandomCase() {
         PriorityQueue<String> queue = new PriorityQueue<>();
         queue.insert("R");
         assertEquals(queue.front(), ("R"));
@@ -46,5 +46,24 @@ public class PriorityQueueTest {
         queue.heapSort();
         assertEquals(queue.back(), ("S"));
     }
+
+    @Test
+    void testRandomCase2() {
+        PriorityQueue<Integer> queue = new PriorityQueue<>();
+        int max=0;
+        int temp=0;
+        for (int i = -50; i <= 50; i++) {
+            temp=(int) (Math.random()*(73));
+            if(temp>max) {
+                max=temp;
+            }
+            queue.insert(temp);
+        }
+        assertFalse(queue.isEmpty());
+        queue.heapSort();
+        assertEquals(queue.back(), Integer.valueOf(max));
+    }
+
+
 
 }
