@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
 public class StackTest {
     @Test
-    public void testStandardCase() {
+    public void testPushPop() {
         Stack<String> stack = new Stack<>();
         stack.push("Felony");
         stack.push("Misdemeanor");
@@ -18,7 +18,7 @@ public class StackTest {
     }
 
     @Test
-    public void testLimitCase() {
+    public void testEmpty() {
         Stack<Integer> stack = new Stack<>();
         assertTrue(stack.isEmpty());
         assertNull(stack.top());
@@ -31,7 +31,7 @@ public class StackTest {
     }
 
     @Test
-    public void testRandomCase() {
+    public void testTop() {
         Stack<Integer> stack = new Stack<>();
         stack.push(2);
         stack.push(4);
@@ -46,7 +46,7 @@ public class StackTest {
     }
 
     @Test
-    public void testRandomCase2() {
+    public void testClean() {
         Stack<Integer> stack = new Stack<>();
         for (int i = -50; i <= 50; i++) {
             stack.push(i);

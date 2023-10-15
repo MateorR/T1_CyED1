@@ -7,7 +7,7 @@ import org.junit.jupiter.api.*;
 public class QueueTest {
 
     @Test
-    void testStandardCase() {
+    void testStringInsert() {
         Queue<String> queue = new Queue<>();
         queue.enqueue("Luis");
         queue.enqueue("Manrique");
@@ -18,7 +18,7 @@ public class QueueTest {
     }
 
     @Test
-     void testLimitCase() {
+     void testEmpty() {
         Queue<Integer> queue = new Queue<>();
         assertTrue(queue.isEmpty());
         assertNull(queue.peek());
@@ -33,7 +33,7 @@ public class QueueTest {
     }
 
     @Test
-    void testRandomCase() {
+    void testFunctionalities() {
         Queue<Integer> queue = new Queue<>();
         queue.enqueue(2);
         assertEquals(1, queue.size());
