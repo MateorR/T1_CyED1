@@ -18,7 +18,7 @@ public class PriorityQueue<T extends Comparable<T>> implements Prioritable<T> {
 
     @Override
     public T front() {
-        if (isEmpty())
+        if (!isEmpty())
             return elements.get(0);
         else
             return null;
@@ -26,7 +26,7 @@ public class PriorityQueue<T extends Comparable<T>> implements Prioritable<T> {
 
     @Override
     public T back() {
-        if (isEmpty())
+        if (!isEmpty())
             return elements.get(elements.size() - 1);
         else
             return null;
@@ -34,14 +34,14 @@ public class PriorityQueue<T extends Comparable<T>> implements Prioritable<T> {
 
     @Override
     public boolean isEmpty() {
-        return !elements.isEmpty();
+        return elements.isEmpty();
     }
 
     @Override
     public void insert(T elem) {
         elements.add(elem);
         this.heapSize = elements.size();
-        if (isEmpty()) {
+        if (!isEmpty()) {
             for (int i = (this.heapSize / 2) - 1; i >= 0; i--) {
                 this.heapSize = elements.size() - 1;
                 maxHeapify(i);
@@ -52,7 +52,7 @@ public class PriorityQueue<T extends Comparable<T>> implements Prioritable<T> {
     @Override
     public T extractMax() {
         int last = elements.size() - 1;
-        if (isEmpty()) {
+        if (!isEmpty()) {
             T max = elements.get(0);
             elements.set(0, elements.get(last));
             elements.remove(last);

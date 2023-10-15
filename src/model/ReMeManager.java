@@ -15,6 +15,9 @@ public class ReMeManager {
     }
 
     public String addAssignment(String title, String description, String dueDate, int priority, int type) {
+        if (tasks.containsKey(title)) {
+            return "There is already an assignment with that title";
+        }
         Assignment assignment = new Assignment(title, description, dueDate, priority, false, type);
         tasks.add(title, assignment);
         undoStack.push(new Action(0, assignment));
@@ -69,7 +72,7 @@ public class ReMeManager {
     public String showPriorityAssignments() {
         buildPriorityAssignments();
         priorityAssignments.heapSort();
-        if (priorityAssignments.isEmpty()) {
+        if (!priorityAssignments.isEmpty()) {
             StringBuilder stringBuilder = new StringBuilder();
             for (int i = priorityAssignments.getHeapSize(); i >= 0; i--) {
                 stringBuilder.append(priorityAssignments.getElem(i));
@@ -82,13 +85,14 @@ public class ReMeManager {
 
     public String showPriorityAssignmentsByDate() {
         buildPriorityAssignments();
-        if (priorityAssignments.isEmpty()) {
+        if (!priorityAssignments.isEmpty()) {
             ArrayList<Assignment> aux = new ArrayList<>();
             aux = priorityAssignments.getElements();
             StringBuilder stringBuilder = new StringBuilder();
             for (Assignment assignment : sortByDate(aux)) {
                 stringBuilder.append(assignment);
             }
+            priorityAssignments = new PriorityQueue<>();
             return stringBuilder.toString();
         }
         priorityAssignments = new PriorityQueue<>();
