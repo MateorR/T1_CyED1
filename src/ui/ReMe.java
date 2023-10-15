@@ -12,66 +12,109 @@ public class ReMe {
 
     public static void main(String[] args) {
         int option;
-        do {
+        String title;
+        String description;
+        String dueDate;
+        int priority;
+        int type;
+        boolean continuity = true;
+        int mod;
+        System.out.println("***************************************");
+        System.out.println("*           Welcome to ReMe           *");
+        System.out.println("***************************************"+ "\n");
+
+        while (continuity){
             menu();
-            System.out.println("Enter an option: ");
             option = input.nextInt();
+            input.nextLine();
             switch (option) {
-                case 1 -> {
+                case 0:
+                    System.out.println("Goodbye! ^^");
+                    continuity = false;
+                    break;
+                case 1 :
                     System.out.println("Enter the title: ");
-                    String title = input.nextLine();
+                    title = input.nextLine();
                     System.out.println("Enter the description: ");
-                    String description = input.nextLine();
-                    System.out.println("Enter the due date: ");
-                    String dueDate = input.nextLine();
+                    description = input.nextLine();
+                    System.out.println("Enter the due date in the format yyyy-[m]m-[d]d hh:mm:ss: ");
+                    dueDate = input.nextLine();
                     System.out.println("Enter the priority, in a scale from 1 to 5, and 0 if it has no priority: ");
-                    int priority = input.nextInt();
+                    priority = input.nextInt();
                     input.nextLine();
                     System.out.println("Enter the type (0: task, 1: reminder): ");
-                    int type = input.nextInt();
+                    type = input.nextInt();
                     input.nextLine();
                     System.out.println(controller.addAssignment(title, description, dueDate, priority, type));
-                }
-                case 2 -> System.out.println(controller.showTasks());
-                case 3 -> System.out.println(controller.showReminders());
-                case 4 -> System.out.println(controller.showAll());
-                case 5 -> {
+                    break;
+                case 2 :
                     System.out.println("Enter the title of the assignment you want to remove: ");
-                    String title = input.nextLine();
+                    title = input.nextLine();
                     System.out.println(controller.removeAssignment(title));
-                }
-                case 6 -> {
+                    break;
+                case 3 :
                     System.out.println("Enter the title of the assignment you want to modify: ");
-                    String title = input.nextLine();
-                    if (controller.getAssignment(title) == null) {
-                        System.out.println("There is no assignment with that title");
-                        break;
-                    }
-                    System.out.println("Enter the new title: ");
-                    String newTitle = input.nextLine();
-                    System.out.println("Enter the new description: ");
-                    String description = input.nextLine();
-                    System.out.println("Enter the new due date: ");
-                    String dueDate = input.nextLine();
-                    System.out.println("Enter the new priority, in a scale from 1 to 5, and 0 if it has no priority: ");
-                    int priority = input.nextInt();
-                    input.nextLine();
-                    input.nextLine();
-                    System.out.println(controller.modifyAssignment(title, newTitle, description, dueDate, priority));
-                }
-                case 7 -> System.out.println("Goodbye! ^^");
-                default -> System.out.println("Invalid option");
+                    title = input.nextLine();
+                    System.out.println("What do you want to modify?");
+                    mod= modifyMenu();
+                    System.out.println("Enter the new value: ");
+                    String newValue = input.nextLine();
+                    System.out.println(controller.modifyAssignment(title, mod, newValue));
+                    break;
+                case 4 :
+                    System.out.println(controller.undo());
+                    break;
+                case 5 :
+                    System.out.println(controller.showTasks());
+                    break;
+                case 6 :
+                    System.out.println(controller.showReminders());
+                    break;
+                case 7 :
+                    System.out.println(controller.showAll());
+                    break;
+                case 8 :
+                    System.out.println(controller.showPriorityAssignments());
+                    break;
+                case 9 :
+                    System.out.println(controller.showPriorityAssignmentsByDate());
+                    break;
+                case 10 :
+                    System.out.println(controller.showNonPriorityAssignments());
+                    break;
+                default:
+                    System.out.println("Invalid option");
+                    break;
             }
-        } while (option != 7);
+            System.out.println("\n");
+        }
     }
 
     public static void menu() {
         System.out.println("1. Add a assignment");
-        System.out.println("2. List all tasks");
-        System.out.println("3. List all reminders");
-        System.out.println("4. Show all assignments");
-        System.out.println("5. Remove a assignment");
-        System.out.println("6. Modify a assignment");
-        System.out.println("7. Exit");
+        System.out.println("2. Remove a assignment");
+        System.out.println("3. Modify a assignment");
+        System.out.println("4. Undo last action");
+        System.out.println("5. Show all tasks");
+        System.out.println("6. Show all reminders");
+        System.out.println("7. Show all assignments");
+        System.out.println("8. Show priority assignments");
+        System.out.println("9. Show priority assignments by date");
+        System.out.println("10. Show non priority assignments ");
+        System.out.println("0. Exit");
+    }
+
+    public static int modifyMenu(){
+        System.out.println("1. Modify description");
+        System.out.println("2. Modify due date, remember the format yyyy-[m]m-[d]d hh:mm:ss");
+        System.out.println("3. Modify priority");
+        System.out.println("4. Modify type");
+        int opt = input.nextInt();
+        input.nextLine();
+        if (opt < 1 || opt > 4){
+            System.out.println("Invalid option");
+            modifyMenu();
+        }
+        return opt;
     }
 }
